@@ -12,7 +12,7 @@ var mux map[string]func(http.ResponseWriter, *http.Request)
 
 func main() {
 	server := http.Server{
-		Addr:    ":8000",
+		Addr:    ":8080",
 		Handler: &myHandler{},
 	}
 	
