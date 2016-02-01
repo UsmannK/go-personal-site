@@ -2,10 +2,15 @@ package main
 
 import (
 	"net/http"
+	"fmt"
 )
 
-func servePage(w http.ResponseWriter, r *http.Request) {
+func servePersonalSite(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,"static/" + r.URL.Path[1:])
+}
+
+func serveKanyeSite(w httpResponseWriter, r *http.Request) {
+	http.ServeFile(w,r,"kanye/")
 }
 
 var mux map[string]func(http.ResponseWriter, *http.Request)
@@ -22,5 +27,10 @@ func main() {
 type myHandler struct{}
 
 func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	servePage(w,r)
+	if string.Contains(string,ToLower(r.Host), "iswavesoutyet.com") {
+		serveKanye(w,r)
+	}
+	else {
+		servePersonalSite(w,r)
+	}
 }
